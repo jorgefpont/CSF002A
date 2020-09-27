@@ -1,0 +1,80 @@
+Script started on 2020-09-26 18:35:03-07:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="129" LINES="21"]
+]0;jorge@jorge-NUC7: ~/csf002a/hwk1[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk1[00m$ ./hwk1
+Enter year: 2020
+Enter month: 3
+Enter day: 23
+Enter movie title: Star Wars teh    he Universe Ends
+Enter time - hour: 4
+Enter time - minutes: 45
+Enter time - am or pm: pm
+---------------------------------------------------------------------
+
+			AMC Universal CityWalk
+
+			     Presenting
+
+			Star Wars the Universe Ends
+
+Show time: 04:45 pm	Date: 03/23/2020
+
+Theater: 1		Rating: PG-13
+
+Adult Admission $12.75
+
+Don't forget to get your free small popcorn with 4 tickets or more!!!
+
+---------------------------------------------------------------------
+]0;jorge@jorge-NUC7: ~/csf002a/hwk1[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk1[00m$ ./hwk1
+Enter year: 1999
+Enter month: 12
+Enter day: 25
+Enter movie title: Prince, 1999
+Enter time - hour: 9
+Enter time - minutes: 0
+Enter time - am or pm: pm
+---------------------------------------------------------------------
+
+			AMC Universal CityWalk
+
+			     Presenting
+
+			Prince, 1999
+
+Show time: 09:00 pm	Date: 12/25/1999
+
+Theater: 1		Rating: PG-13
+
+Adult Admission $12.75
+
+Don't forget to get your free small popcorn with 4 tickets or more!!!
+
+---------------------------------------------------------------------
+]0;jorge@jorge-NUC7: ~/csf002a/hwk1[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk1[00m$ ./hwk1
+Enter year: 1988
+Enter month: 1
+Enter day: 1
+Enter movie title: Orwell 1988 a Apocalypse
+Enter time - hour: 7
+Enter time - minutes: 15
+Enter time - am or pm: pm
+---------------------------------------------------------------------
+
+			AMC Universal CityWalk
+
+			     Presenting
+
+			Orwell 1988 Apocalypse
+
+Show time: 07:15 pm	Date: 01/01/1988
+
+Theater: 1		Rating: PG-13
+
+Adult Admission $12.75
+
+Don't forget to get your free small popcorn with 4 tickets or more!!!
+
+---------------------------------------------------------------------
+]0;jorge@jorge-NUC7: ~/csf002a/hwk1[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk1[00m$ exit
+exit
+
+Script done on 2020-09-26 18:37:17-07:00 [COMMAND_EXIT_CODE="0"]
