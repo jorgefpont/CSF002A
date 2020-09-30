@@ -18,6 +18,7 @@ over the loan period and will display the results of its calculations
 #include <math.h>
 
 using namespace std;
+const double property_tax_rate = 1.5;
 
 int main() {
 
@@ -52,25 +53,28 @@ int main() {
                     (1.0 - 
                     1.0 / (pow(1.0 + monthly_rate / 100, duration * 12)));
     
-    // need to make global
-    double property_tax_rate = 1.5;
     double monthly_tax = offer_price * property_tax_rate / 100 / 12;
 
     double monthly_payment_w_tax = mortgage_monthly_payment + monthly_tax;
     double total_payment = mortgage_monthly_payment * 12.0 * duration;
+    string maturity_date = "12/31/" + to_string(duration + 2020);
 
     cout << "\t\t***************************" << endl << endl;
     cout << "\t\tMORTGAGE CALCULATOR RESULTS" << endl << endl;
     cout << "\t\t***************************" << endl << endl;
-    cout << "Property adress: \t\t\t\t" << address << endl;
-    cout << "Property offer price (principal): \t\t" << offer_price << endl;
-    cout << "Down payment: \t\t\t\t\t" << down_payment << endl;
-    cout << "Loan amount: \t\t\t\t\t" << loan_amount << endl;
-    cout << "Loan maturity date: \t\t\t" << endl;
-    cout << "Mortgage monthly payment: \t\t\t" << mortgage_monthly_payment << endl;
-    cout << "Monthly payment (property tax included): \t" << monthly_payment_w_tax << endl;
-    cout << "Total payment: \t\t\t\t\t" << total_payment << endl;
-
+    cout << "Property adress: " << address << endl;
+    cout << fixed << setprecision (2);   // 2 digits after the decimal point.
+    cout << "Property offer price (principal): \t\t$ " << setw(10) 
+            << offer_price << endl;
+    cout << "Down payment: \t\t\t\t\t$ " << setw(10) << down_payment << endl;
+    cout << "Loan amount: \t\t\t\t\t$ " << setw(10) << loan_amount << endl;
+    cout << "Loan maturity date: \t\t\t\t" << setw(12) 
+            << maturity_date << endl;
+    cout << "Mortgage monthly payment: \t\t\t$ " << setw(10)
+            << mortgage_monthly_payment << endl;
+    cout << "Monthly payment (property tax included): \t$ " << setw(10) 
+            << monthly_payment_w_tax << endl;
+    cout << "Total payment: \t\t\t\t\t$ " << setw(10) << total_payment << endl;
     cout << "\n\n";
     
 }
