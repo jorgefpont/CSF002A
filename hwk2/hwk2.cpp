@@ -14,11 +14,10 @@ over the loan period and will display the results of its calculations
 #include <iostream>
 #include <iomanip>
 #include <string>
-//#include <cmath>
-#include <math.h>
+#include <math.h> //#include <cmath> did not work
 
 using namespace std;
-const double property_tax_rate = 1.5;
+const double property_tax_rate = 1.5;  // hwk requirement to declare const
 
 int main() {
 
