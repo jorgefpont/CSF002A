@@ -8,7 +8,8 @@ property's value and percentage of down payment.
 It will then calculate the loan amount, 
 monthly mortgage payment, total monthly payment 
 including property tax and total payment 
-over the loan period and will display the results of its calculations
+over the loan period and will display the 
+results of its calculations
 */
 
 #include <iostream>
@@ -18,6 +19,11 @@ over the loan period and will display the results of its calculations
 
 using namespace std;
 const double property_tax_rate = 1.5;  // hwk requirement to declare const
+
+// Timer function
+void  Delay (int  milliseconds,  
+            std::string delay_msg = "",  
+            char  delay_symbol = '.') ;
 
 int main() {
 
@@ -34,7 +40,7 @@ int main() {
     cout << "Enter property address: ";
     cin.ignore();
     getline (cin, address);
-    
+
     cout << "Enter property offer price (principal): ";
     cin >> offer_price;
     cout << "Enter down payment (in percentage %): ";
@@ -45,6 +51,10 @@ int main() {
     cin >> duration;
     cout << endl << endl;
 
+    // Dummy delay
+    Delay (5000, "Mortgage calculator is processing your data ... Please wait.");
+    cout << endl << endl;
+
     double down_payment = offer_price * (down_pct / 100);
     double loan_amount = offer_price - down_payment;
     double monthly_rate = annual_rate / 12.0;
@@ -53,11 +63,11 @@ int main() {
                     1.0 / (pow(1.0 + monthly_rate / 100, duration * 12)));
     
     double monthly_tax = offer_price * property_tax_rate / 100 / 12;
-
     double monthly_payment_w_tax = mortgage_monthly_payment + monthly_tax;
     double total_payment = mortgage_monthly_payment * 12.0 * duration;
     string maturity_date = "12/31/" + to_string(duration + 2020);
 
+    // output
     cout << "\t\t***************************" << endl << endl;
     cout << "\t\tMORTGAGE CALCULATOR RESULTS" << endl << endl;
     cout << "\t\t***************************" << endl << endl;
@@ -76,5 +86,19 @@ int main() {
     cout << "Total payment: \t\t\t\t\t$ " << setw(10) << total_payment << endl;
     cout << "\n\n";
     
+}
+
+void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol) {
+
+    const int millisecond_cycles = 600;
+    std::cout  << delay_msg << std::flush ;
+
+    for (int ms =0 ; ms < milliseconds;  ++ms) {
+        for (int cycle=0;  cycle <= millisecond_cycles * 1000; ++cycle) {
+            if (ms%1000==0 && cycle== millisecond_cycles) { // print a symbol every second
+                std::cout << delay_symbol << std::flush;
+            }
+        }                        
+    }
 }
 
