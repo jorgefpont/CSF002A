@@ -1,16 +1,16 @@
-/*
-Implement a simple mortgage calculation program 
-The program will start out by asking for:
-property zip code, property's full address, 
-annual interest rate (in percentage), 
-number of years to pay off the loan, 
-property's value and percentage of down payment. 
-It will then calculate the loan amount, 
-monthly mortgage payment, total monthly payment 
-including property tax and total payment 
-over the loan period and will display the 
-results of its calculations
-*/
+/* ======================================================
+File Name   : hwk2.cpp
+Author      : Jorge Pont
+Copyright   : N/A
+Description : hwk2, a mortgage calculator
+Revision History:  initial
+Date        : 10/1/2020
+
+Version     : 1.0
+Change ID   : NA     
+Author      : Jorge Pont      
+Comment     : NA
+========================================================= */
 
 #include <iostream>
 #include <iomanip>
@@ -18,7 +18,7 @@ results of its calculations
 #include <math.h> //#include <cmath> did not work
 
 using namespace std;
-const double property_tax_rate = 1.5;  // hwk requirement to declare const
+const double kPropertyTaxRate = 1.5;  // hwk requirement to declare const
 
 // Timer function
 void  Delay (int  milliseconds,  
@@ -62,7 +62,7 @@ int main() {
                     (1.0 - 
                     1.0 / (pow(1.0 + monthly_rate / 100, duration * 12)));
     
-    double monthly_tax = offer_price * property_tax_rate / 100 / 12;
+    double monthly_tax = offer_price * kPropertyTaxRate / 100 / 12;
     double monthly_payment_w_tax = mortgage_monthly_payment + monthly_tax;
     double total_payment = mortgage_monthly_payment * 12.0 * duration;
     string maturity_date = "12/31/" + to_string(duration + 2020);
@@ -72,7 +72,7 @@ int main() {
     cout << "\t\tMORTGAGE CALCULATOR RESULTS" << endl << endl;
     cout << "\t\t***************************" << endl << endl;
     cout << "Property adress: " << address << endl;
-    cout << fixed << setprecision (2);   // 2 digits after the decimal point.
+    cout << fixed << setprecision (2);   // 2 digits after the decimal point
     cout << "Property offer price (principal): \t\t$ " << setw(10) 
             << offer_price << endl;
     cout << "Down payment: \t\t\t\t\t$ " << setw(10) << down_payment << endl;
@@ -85,7 +85,8 @@ int main() {
             << monthly_payment_w_tax << endl;
     cout << "Total payment: \t\t\t\t\t$ " << setw(10) << total_payment << endl;
     cout << "\n\n";
-    
+
+    return 0; // I won't forget this time ...
 }
 
 void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol) {

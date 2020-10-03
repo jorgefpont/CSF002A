@@ -1,0 +1,86 @@
+Script started on 2020-10-03 16:28:07-07:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="104" LINES="17"]
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./hwk2 
+Enter property zip code: 95148
+Enter property address: 2613 Aborn Rd., San Jose, Ca
+Enter property offer price (principal): 312500
+Enter down payment (in percentage %): 20.0
+Enter annual interest rate (in percentage %): 5.75
+Enter number of years financing: 15
+
+
+Mortgage calculator is processing your data ... Please wait......
+
+		***************************
+
+		MORTGAGE CALCULATOR RESULTS
+
+		***************************
+
+Property adress: 2613 Aborn Rd., San Jose, Ca
+Property offer price (principal): 		$  312500.00
+Down payment: 					$   62500.00
+Loan amount: 					$  250000.00
+Loan maturity date: 				  12/31/2035
+Mortgage monthly payment: 			$    2076.03
+Monthly payment (property tax included): 	$    2466.65
+Total payment: 					$  373684.54
+
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./hwk2 
+Enter property zip code: 94022
+Enter property address: 12345 El monte Rd., Los Altoc s, Ca
+Enter property offer price (principal): 5000000
+Enter down payment (in percentage %): 10
+Enter annual interest rate (in percentage %): 3.75
+Enter number of years financing: 30
+
+
+Mortgage calculator is processing your data ... Please wait......
+
+		***************************
+
+		MORTGAGE CALCULATOR RESULTS
+
+		***************************
+
+Property adress: 12345 El monte Rd., Los Altos, Ca
+Property offer price (principal): 		$ 5000000.00
+Down payment: 					$  500000.00
+Loan amount: 					$ 4500000.00
+Loan maturity date: 				  12/31/2050
+Mortgage monthly payment: 			$   20840.20
+Monthly payment (property tax included): 	$   27090.20
+Total payment: 					$ 7502472.58
+
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./hwk2 
+Enter property zip code: 95014
+Enter property address: One infinite Loop             Infinite Loop
+Enter property offer price (principal): 7500000
+Enter down payment (in percentage %): 2 10 5
+Enter annual interest rate (in percentage %): 3.125
+Enter number of years financing: 30
+
+
+Mortgage calculator is processing your data ... Please wait......
+
+		***************************
+
+		MORTGAGE CALCULATOR RESULTS
+
+		***************************
+
+Property adress: One Infinite Loop
+Property offer price (principal): 		$ 7500000.00
+Down payment: 					$ 1125000.00
+Loan amount: 					$ 6375000.00
+Loan maturity date: 				  12/31/2050
+Mortgage monthly payment: 			$   27308.94
+Monthly payment (property tax included): 	$   36683.94
+Total payment: 					$ 9831216.62
+
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ exit
+exit
+
+Script done on 2020-10-03 16:32:17-07:00 [COMMAND_EXIT_CODE="0"]

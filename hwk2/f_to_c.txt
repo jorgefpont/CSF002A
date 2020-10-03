@@ -1,0 +1,33 @@
+Script started on 2020-10-01 21:09:53-07:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="104" LINES="17"]
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./f_to_c 
+Enter temperature in deg. F: 100
+100.00 F = 37.78 C
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./f_to_c 
+Enter temperature in deg. F: 0
+0.00 F = -17.78 C
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./f_to_c 
+Enter temperature in deg. F: -25
+-25.00 F = -31.67 C
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./f_to_c 
+Enter temperature in deg. F: -30
+-30.00 F = -34.44 C
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./f_to_c 
+Enter temperature in deg. F: 32
+32.00 F = 0.00 C
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./f_to_c 
+Enter temperature in deg. F: 8 98.6
+98.60 F = 37.00 C
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./f_to_c 
+Enter temperature in deg. F: 212
+212.00 F = 100.00 C
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ exit
+exit
+
+Script done on 2020-10-01 21:11:22-07:00 [COMMAND_EXIT_CODE="0"]

@@ -1,21 +1,20 @@
-Script started on 2020-09-26 18:35:03-07:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="129" LINES="21"]
-]0;jorge@jorge-NUC7: ~/csf002a/hwk1[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk1[00m$ ./hwk1
+jorge@jorge-NUC7: ~/csf002a/hwk1[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk1[00m$ ./hwk1
 Enter year: 2020
-Enter month: 3
-Enter day: 23
-Enter movie title: Star Wars teh    he Universe Ends
-Enter time - hour: 4
+Enter month: 9
+Enter day: 24
+Enter movie title: Star Wars Battle GFal   alactica
+Enter time - hour: 10
 Enter time - minutes: 45
-Enter time - am or pm: pm
+Enter time - am or pm: am
 ---------------------------------------------------------------------
 
 			AMC Universal CityWalk
 
 			     Presenting
 
-			Star Wars the Universe Ends
+			Star Wars Battle Galactica
 
-Show time: 04:45 pm	Date: 03/23/2020
+Show time: 10:45 am	Date: 9/24/2020
 
 Theater: 1		Rating: PG-13
 
@@ -26,10 +25,10 @@ Don't forget to get your free small popcorn with 4 tickets or more!!!
 ---------------------------------------------------------------------
 ]0;jorge@jorge-NUC7: ~/csf002a/hwk1[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk1[00m$ ./hwk1
 Enter year: 1999
-Enter month: 12
-Enter day: 25
-Enter movie title: Prince, 1999
-Enter time - hour: 9
+Enter month: 1
+Enter day: 1
+Enter movie title: Prince 1999^[[D^[[D^[[D                Party like it's 1999
+Enter time - hour: 11
 Enter time - minutes: 0
 Enter time - am or pm: pm
 ---------------------------------------------------------------------
@@ -38,9 +37,9 @@ Enter time - am or pm: pm
 
 			     Presenting
 
-			Prince, 1999
+			Prince Party like it's 1999
 
-Show time: 09:00 pm	Date: 12/25/1999
+Show time: 11:0 pm	Date: 1/1/1999
 
 Theater: 1		Rating: PG-13
 
@@ -50,12 +49,12 @@ Don't forget to get your free small popcorn with 4 tickets or more!!!
 
 ---------------------------------------------------------------------
 ]0;jorge@jorge-NUC7: ~/csf002a/hwk1[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk1[00m$ ./hwk1
-Enter year: 1988
-Enter month: 1
-Enter day: 1
-Enter movie title: Orwell 1988 a Apocalypse
-Enter time - hour: 7
-Enter time - minutes: 15
+Enter year: 2020 1    2020
+Enter month: 12
+Enter day: 31
+Enter movie title: Who won the elction                   Al th  e President'  s me  Men^[[D^[[D                            l te   he Pe resident's Name
+Enter time - hour: 8
+Enter time - minutes: 30
 Enter time - am or pm: pm
 ---------------------------------------------------------------------
 
@@ -63,9 +62,9 @@ Enter time - am or pm: pm
 
 			     Presenting
 
-			Orwell 1988 Apocalypse
+			All the President's Name
 
-Show time: 07:15 pm	Date: 01/01/1988
+Show time: 8:30 pm	Date: 12/31/2020
 
 Theater: 1		Rating: PG-13
 
@@ -77,4 +76,4 @@ Don't forget to get your free small popcorn with 4 tickets or more!!!
 ]0;jorge@jorge-NUC7: ~/csf002a/hwk1[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk1[00m$ exit
 exit
 
-Script done on 2020-09-26 18:37:17-07:00 [COMMAND_EXIT_CODE="0"]
+Script done on 2020-09-27 15:36:08-07:00 [COMMAND_EXIT_CODE="0"]

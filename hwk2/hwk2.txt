@@ -1,0 +1,113 @@
+Script started on 2020-10-01 21:37:46-07:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="104" LINES="17"]
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./he[Kwk2 
+Enter property zip code: 95148
+Enter property address: ^2613 Aborn Rd, San Jose, CA
+Enter property offer price (principal): 312500
+Enter down payment (in percentage %): 20.0
+Enter annual interest rate (in percentage %): 5.75
+Enter number of years financing: 15
+
+
+Mortgage calculator is processing your data ... Please wait......
+
+		***************************
+
+		MORTGAGE CALCULATOR RESULTS
+
+		***************************
+
+Property adress: 2613 Aborn Rd, San Jose, CA
+Property offer price (principal): 		$  312500.00
+Down payment: 					$   62500.00
+Loan amount: 					$  250000.00
+Loan maturity date: 				  12/31/2035
+Mortgage monthly payment: 			$    2076.03
+Monthly payment (property tax included): 	$    2466.65
+Total payment: 					$  373684.54
+
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./hwk2 
+Enter property zip code: 94025
+Enter property address: 2234 Oak Street, Milpitas, Ca
+Enter property offer price (principal): 1750000
+Enter down payment (in percentage %): 15
+Enter annual interest rate (in percentage %): 4.25
+Enter number of years financing: 30
+
+
+Mortgage calculator is processing your data ... Please wait......
+
+		***************************
+
+		MORTGAGE CALCULATOR RESULTS
+
+		***************************
+
+Property adress: 2234 Oak Street, Milpitas, Ca
+Property offer price (principal): 		$ 1750000.00
+Down payment: 					$  262500.00
+Loan amount: 					$ 1487500.00
+Loan maturity date: 				  12/31/2050
+Mortgage monthly payment: 			$    7317.61
+Monthly payment (property tax included): 	$    9505.11
+Total payment: 					$ 2634338.12
+
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./hwk2 
+Enter property zip code: 94531
+Enter property address: 1 Infinite Circle, Cupertino, Ca
+Enter property offer price (principal): 10000000
+Enter down payment (in percentage %): 20
+Enter annual interest rate (in percentage %): 3.75
+Enter number of years financing: 30
+
+
+Mortgage calculator is processing your data ... Please wait......
+
+		***************************
+
+		MORTGAGE CALCULATOR RESULTS
+
+		***************************
+
+Property adress: 1 Infinite Circle, Cupertino, Ca
+Property offer price (principal): 		$ 10000000.00
+Down payment: 					$ 2000000.00
+Loan amount: 					$ 8000000.00
+Loan maturity date: 				  12/31/2050
+Mortgage monthly payment: 			$   37049.25
+Monthly payment (property tax included): 	$   49549.25
+Total payment: 					$ 13337729.04
+
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ ./hwk2 
+Enter property zip code: 87654
+Enter property address: 1 Infinite Circle, Cupertino, Ca
+Enter property offer price (principal): 9000000
+Enter down payment (in percentage %): 10
+Enter annual interest rate (in percentage %): 3.45
+Enter number of years financing: 30
+
+
+Mortgage calculator is processing your data ... Please wait......
+
+		***************************
+
+		MORTGAGE CALCULATOR RESULTS
+
+		***************************
+
+Property adress: 1 Infinite Circle, Cupertino, Ca
+Property offer price (principal): 		$ 9000000.00
+Down payment: 					$  900000.00
+Loan amount: 					$ 8100000.00
+Loan maturity date: 				  12/31/2050
+Mortgage monthly payment: 			$   36146.92
+Monthly payment (property tax included): 	$   47396.92
+Total payment: 					$ 13012891.88
+
+
+]0;jorge@jorge-NUC7: ~/csf002a/hwk2[01;32mjorge@jorge-NUC7[00m:[01;34m~/csf002a/hwk2[00m$ exit
+exit
+
+Script done on 2020-10-01 21:42:12-07:00 [COMMAND_EXIT_CODE="0"]
