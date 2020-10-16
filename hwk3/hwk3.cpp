@@ -34,6 +34,7 @@ int main() {
 
     // Function declaration
     int SumOfIntegers(int number);
+    bool CheckLeapYear(int year);
 
     // variable declaration
     int anum = 0;
@@ -61,25 +62,37 @@ int main() {
                     cout << "Negative numbers are not valid\n";
                 }
                 break;
+
             case 'L': case 'l':
                 cout << "Enter a year: ";
                 cin >> ayear;
+                //bool leap;
                 if (ayear >= 0) {
-                    cout << ayear << endl;    
+                    bool leap = CheckLeapYear(ayear);
+                    if (leap){
+                        cout << ayear << " is a leap year\n";
+                    }
+                    else {
+                        cout << ayear << " is not a lep year\n";
+                    }
+                        
                 }
                 else {
                     cout << "Negative years are not valid\n";
                 }
                 break;
+
             case 'C': case 'c':
                 cout << "Enter some text: ";
                 cin.ignore();
                 getline (cin, sometext);
                 cout << sometext << endl;
                 break;
+
             case 'E': case 'e':
                 cout << "Bye, thanks for playing\n";
                 exit(0);
+
             default:
                 cout << "\nInvalid input, try again ...\n";
                 break;
@@ -88,11 +101,28 @@ int main() {
     return 0;
 }
 
-int SumOfIntegers(int number) {
+int SumOfIntegers(int number) 
+{
     int sum = 0;
     while (number != 0) {
         sum = sum + number % 10;
         number = number / 10;
     }
     return sum;
+}
+
+bool CheckLeapYear(int year)
+{
+    bool leap = false;
+
+    if (year % 4 == 0)
+        leap = true;
+    
+    if ((year % 4 == 0) && (year % 100 == 0))
+        leap = false;
+
+    if ((year % 4 == 0) && (year % 400 == 0))
+        leap = true;
+    
+    return leap;
 }
