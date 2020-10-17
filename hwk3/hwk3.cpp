@@ -18,32 +18,24 @@ Comment     : NA
 #include <string>
 #include <stdlib.h>
 
+// Function declaration
+int SumOfIntegers(int number);
+bool CheckLeapYear(int year);
+int NumberOfVowels (string astring);
+void Menu();
+
 using namespace std;
 
 int main() {
 
-    // UI memu
-    cout << "*****************************" << endl;
-    cout << "*          FUN MENU         *" << endl;
-    cout << "*****************************" << endl << endl;
-    cout << "  <S>um of natural integers" << endl;
-    cout << "  <L>eap year check" << endl;
-    cout << "  <C>ount vowels" << endl;
-    cout << "  <E>xit" << endl << endl;
-    cout << "*****************************" << endl << endl;
-
-    // Function declaration
-    int SumOfIntegers(int number);
-    bool CheckLeapYear(int year);
+    // Show the UI memu
+    Menu();
 
     // variable declaration
     int anum = 0;
     int ayear = 0;
     string sometext;
-
-    // User input
     char sel = 'S';
-
 
     while (sel != 'E' || 'e') {
 
@@ -54,6 +46,7 @@ int main() {
             case 'S': case 's':
                 cout << "Enter an integer: ";
                 cin >> anum;
+
                 if (anum >= 0) {
                     cout << "Sum of integers is: " << 
                              SumOfIntegers(anum) << endl;    
@@ -66,14 +59,14 @@ int main() {
             case 'L': case 'l':
                 cout << "Enter a year: ";
                 cin >> ayear;
-                //bool leap;
+
                 if (ayear >= 0) {
                     bool leap = CheckLeapYear(ayear);
                     if (leap){
                         cout << ayear << " is a leap year\n";
                     }
                     else {
-                        cout << ayear << " is not a lep year\n";
+                        cout << ayear << " is not a leap year\n";
                     }
                         
                 }
@@ -104,7 +97,8 @@ int main() {
 int SumOfIntegers(int number) 
 {
     int sum = 0;
-    while (number != 0) {
+    while (number != 0) 
+    {
         sum = sum + number % 10;
         number = number / 10;
     }
@@ -113,16 +107,41 @@ int SumOfIntegers(int number)
 
 bool CheckLeapYear(int year)
 {
-    bool leap = false;
+    bool leap = true;
 
-    if (year % 4 == 0)
-        leap = true;
-    
-    if ((year % 4 == 0) && (year % 100 == 0))
+    if (year % 4 != 0)
+    {
         leap = false;
-
-    if ((year % 4 == 0) && (year % 400 == 0))
-        leap = true;
-    
+    }
+    else
+    {
+        if (year % 100 != 0)
+        {
+            leap = true;
+        }
+        else
+        {
+            if (year % 400 == 0)
+            {
+                leap = true;
+            }
+            else
+            {
+                leap = false;
+            }
+        }
+    }
     return leap;
+}
+
+void Menu()
+{
+    cout << "*****************************\n";
+    cout << "*          FUN MENU         *\n";
+    cout << "*****************************\n";
+    cout << "  <S>um of natural integers\n";
+    cout << "  <L>eap year check\n";
+    cout << "  <C>ount vowels\n";
+    cout << "  <E>xit\n";
+    cout << "*****************************\n\n";
 }
