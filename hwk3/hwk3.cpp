@@ -20,7 +20,7 @@ Author      : Jorge Pont
 using namespace std;
 
 // Function declaration
-int SumOfIntegers(int number);
+int SumOfIntegers(long number);
 bool CheckLeapYear(int year);
 int NumberOfVowels (string astring);
 void Menu();
@@ -31,26 +31,28 @@ int main() {
     Menu();
 
     // variable declaration
-    int anum = 0;
+    long anum = 0;
     int ayear = 0;
     string sometext;
-    char sel = 'S';
+    char sel = 's';
 
     while (sel != 'E' || 'e') {
 
-        cout << "Please choose an option fromt the FUN MENU: ";
+        cout << "Please choose an option from the FUN MENU: ";
         cin >> sel;
 
-        switch (sel) {
+        switch (sel) 
+        {
             case 'S': case 's':
                 cout << "Enter an integer: ";
                 cin >> anum;
 
-                if (anum >= 0) {
-                    cout << "Sum of integers is: " << 
-                             SumOfIntegers(anum) << endl;    
+                if (anum >= 0)
+                {
+                    cout << "Sum of integers is: " << SumOfIntegers(anum) << endl;    
                 }
-                else {
+                else 
+                {
                     cout << "Negative numbers are not valid\n";
                 }
                 break;
@@ -58,31 +60,30 @@ int main() {
             case 'L': case 'l':
                 cout << "Enter a year: ";
                 cin >> ayear;
+                //bool leap = CheckLeapYear(ayear);
 
-                if (ayear >= 0) {
-                    bool leap = CheckLeapYear(ayear);
-                    if (leap){
-                        cout << ayear << " is a leap year\n";
-                    }
-                    else {
-                        cout << ayear << " is not a leap year\n";
-                    }
-                        
+                if (CheckLeapYear(ayear))
+                {
+                    cout << ayear << " is a leap year\n";
                 }
-                else {
-                    cout << "Negative years are not valid\n";
+                else
+                {
+                    cout << ayear << " is not a leap year\n";
                 }
                 break;
 
             case 'C': case 'c':
                 cout << "Enter some text: ";
-                cin.ignore();
+                if (cin.peek() == '\n')
+                {
+                    cin.ignore();
+                }
                 getline (cin, sometext);
                 cout << "Your entry has " << NumberOfVowels(sometext) << " vowels\n";
                 break;
 
             case 'E': case 'e':
-                cout << "Bye, thanks for playing\n";
+                cout << "The fun is over. Have a nice day!!!\n\n";
                 exit(0);
 
             default:
@@ -93,7 +94,7 @@ int main() {
     return 0;
 }
 
-int SumOfIntegers(int number) 
+int SumOfIntegers(long number) 
 {
     int sum = 0;
     while (number != 0) 
