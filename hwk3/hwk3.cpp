@@ -2,15 +2,14 @@
 File Name   : hwk2.cpp
 Author      : Jorge Pont
 Copyright   : N/A
-Description : hwk3, ...
-Revision History:  initial
+Description : hwk3 cdf002A
+Rev History :  initial
 Date        : 10/11/2020
 
-Version     : 1
+Version     : 1.0
 Comments    : 
 Change ID   : NA     
 Author      : Jorge Pont      
-Comment     : NA
 ========================================================= */
 
 #include <iostream>
@@ -18,16 +17,16 @@ Comment     : NA
 #include <string>
 #include <stdlib.h>
 
+using namespace std;
+
 // Function declaration
 int SumOfIntegers(int number);
 bool CheckLeapYear(int year);
 int NumberOfVowels (string astring);
 void Menu();
 
-using namespace std;
 
 int main() {
-
     // Show the UI memu
     Menu();
 
@@ -79,7 +78,7 @@ int main() {
                 cout << "Enter some text: ";
                 cin.ignore();
                 getline (cin, sometext);
-                cout << sometext << endl;
+                cout << "Your entry has " << NumberOfVowels(sometext) << " vowels\n";
                 break;
 
             case 'E': case 'e':
@@ -132,6 +131,24 @@ bool CheckLeapYear(int year)
         }
     }
     return leap;
+}
+
+int NumberOfVowels (string astring)
+{
+    int vowell_counter = 0;
+
+    for (int i=0; i < astring.length(); i++)
+    {
+        if (astring[i] == 'a' || astring[i] == 'A' ||
+            astring[i] == 'e' || astring[i] == 'E' ||
+            astring[i] == 'i' || astring[i] == 'I' ||
+            astring[i] == 'o' || astring[i] == 'O' ||
+            astring[i] == 'u' || astring[i] == 'U')
+        {
+            vowell_counter ++;
+        }
+    }
+    return vowell_counter;
 }
 
 void Menu()
