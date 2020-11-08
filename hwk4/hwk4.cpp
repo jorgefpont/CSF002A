@@ -24,31 +24,35 @@ using namespace std;
 
 // Function declarations
 void Menu();
-void Run(string make_model_list[], int year_list[], double price_list[], int size);
+void Run(string make_model_list[], int year_list[], double price_list[], int kSize);
 void HandleInvalidInput();
 int GetUserChoice();
 void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol);
 void loadVehicleInventory(string make_model_list[], int year_list[], 
-    double price_list[], int size);
+    double price_list[], int kSize);
 float random_price(double low, double high);
+void SearchByMakeModel(string make_model_list[], int year_list[], 
+    double price_list[], int kSize);
+void Quit();
 
 int main()
 {
-    int size = 16; // array sizes
-    string make_model_list[size];
-    double price_list[size];
-    int year_list[size];
+    const int kSize = 16; // array sizes ****** NEED TO MAKE GLOBAL
+    string make_model_list[kSize];
+    double price_list[kSize];
+    int year_list[kSize];
 
-    // Dummy delay
-    Delay (500, "Loading inventory, please wait ", '.'); // delay to 1000
+    cout << " *** Welcome to Foothill Dealership ***\n\n";
+
+    Delay (3000, "Loading inventory, please wait ", '.'); //dummy delay
     cout << endl << endl;
 
-    Run(make_model_list, year_list, price_list, size);
+    Run(make_model_list, year_list, price_list, kSize);
 
     return 0;
 }
 
-void Run(string make_model_list[], int year_list[], double price_list[], int size)
+void Run(string make_model_list[], int year_list[], double price_list[], int kSize)
 {
     int selection = 1;
 
@@ -60,13 +64,14 @@ void Run(string make_model_list[], int year_list[], double price_list[], int siz
         switch (selection)
         {
             case 1: // View inventory
-                loadVehicleInventory(make_model_list, year_list, price_list, size);
+                loadVehicleInventory(make_model_list, year_list, price_list, kSize);
                 break;
             case 2: // Search by make and model
-                cout << "==>case2\n\n";
+                SearchByMakeModel(make_model_list, year_list, price_list, kSize);
                 break;
             case 3: // Exit
-                cout << "Thanks, exiting the program ...\n\n";
+                //cout << "Thanks, exiting the program ...\n\n";
+                Quit();
                 break;
             default: // Handles the '0' return
                 HandleInvalidInput();
@@ -127,7 +132,7 @@ void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol) {
 }
 
 void loadVehicleInventory(string make_model_list[], int year_list[], 
-    double price_list[], int size)
+    double price_list[], int kSize)
 {
     string make_model;
     double price = 0;
@@ -146,7 +151,7 @@ void loadVehicleInventory(string make_model_list[], int year_list[],
     cout << "           VEHICLE INVENTORY\n";
     cout << "      ****************************\n";
 
-    for (int i=0; i<size; i++)
+    for (int i=0; i<kSize; i++)
     {
         rand_number = rand()%4;
         switch(rand_number)
@@ -176,7 +181,7 @@ void loadVehicleInventory(string make_model_list[], int year_list[],
         }
     }
 
-    for (int i=0; i<size; i++)
+    for (int i=0; i<kSize; i++)
     {
         cout << setw(20) << right << make_model_list[i] << "   " <<
         year_list[i] << "   " << '$' <<
@@ -186,8 +191,44 @@ void loadVehicleInventory(string make_model_list[], int year_list[],
     cout << "\n\n";        
 }
 
+void SearchByMakeModel(string make_model_list[], int year_list[], 
+    double price_list[], int kSize)
+    {
+        string make_model;
+        int count = 0;
+        
+        cout << "Enter name and model: ";
+        cin.ignore();
+        getline(cin, make_model);
+        cout << make_model << " Inventory >>>" << endl;
+
+        for (int i=0; i<kSize; i++)
+        {
+            if (make_model == make_model_list[i])
+            {
+                cout << setw(20) << right << make_model_list[i] << "   " <<
+                year_list[i] << "   " << '$' <<
+                setw(10) << fixed << setprecision(2) << right << 
+                price_list[i] << endl;
+                count ++;
+            }
+        }
+        if (count == 0)
+        {
+            cout << "Your car is not in inventory\n";
+        }
+
+        cout << endl;
+    }
+
 float random_price(double low, double high)
 {
     return (low + static_cast<float> (rand()) / 
         static_cast<float> (RAND_MAX / (high)));
+}
+
+void Quit()
+{
+    cout << "Thanks, exiting the program ...\n\n";
+    exit;
 }
