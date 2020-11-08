@@ -24,11 +24,11 @@ using namespace std;
 
 // Function declarations
 void Menu();
-void Run();
+void Run(string make_model_list[], int year_list[], double price_list[], int size);
 void HandleInvalidInput();
 int GetUserChoice();
 void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol);
-void showVehicleInventory(string make_model_list[], int year_list[], 
+void loadVehicleInventory(string make_model_list[], int year_list[], 
     double price_list[], int size);
 float random_price(double low, double high);
 
@@ -42,15 +42,13 @@ int main()
     // Dummy delay
     Delay (500, "Loading inventory, please wait ", '.'); // delay to 1000
     cout << endl << endl;
-    
-    showVehicleInventory(make_model_list, year_list, price_list, size);
 
-    Run();
+    Run(make_model_list, year_list, price_list, size);
 
     return 0;
 }
 
-void Run()
+void Run(string make_model_list[], int year_list[], double price_list[], int size)
 {
     int selection = 1;
 
@@ -62,7 +60,7 @@ void Run()
         switch (selection)
         {
             case 1: // View inventory
-                cout << "==>case1\n\n";
+                loadVehicleInventory(make_model_list, year_list, price_list, size);
                 break;
             case 2: // Search by make and model
                 cout << "==>case2\n\n";
@@ -128,7 +126,7 @@ void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol) {
     }
 }
 
-void showVehicleInventory(string make_model_list[], int year_list[], 
+void loadVehicleInventory(string make_model_list[], int year_list[], 
     double price_list[], int size)
 {
     string make_model;
