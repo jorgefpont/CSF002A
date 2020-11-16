@@ -75,8 +75,7 @@ Vehicle::~Vehicle () {
 //    cout << "Vehicle object is destroyed ..." << endl;
 }
 
-class InventorySystem
-{
+class InventorySystem {
     private:
         string dealer_name = DEFAULT_DEALER_NAME;
         string dealer_location = DEFAULT_LOCATION;
@@ -92,12 +91,13 @@ class InventorySystem
 
     public:
         static const int MAX_INVENTORY = 1024;
-        const string DEFAULT_DEALER_NAME = {"Any dealer"};
-        const string DEFAULT_LOCATION = {"The lost city"};
-        const int DEFAULT_VEHICLE_COUNT = {0};
+        const string DEFAULT_DEALER_NAME = "Any dealer";
+        const string DEFAULT_LOCATION = "The lost city";
+        const int DEFAULT_VEHICLE_COUNT = 0;
 
         // Constructor destructor
-        InventorySystem(); // need not defayult sconstructor !!!
+        InventorySystem();
+        InventorySystem(string m_dealer_name, string m_dealer_location);
         ~InventorySystem();
 
         // Accessors and mutators definitions
@@ -111,7 +111,7 @@ class InventorySystem
         void Run();
     
     private:
-        // had to put this bellow the plublic declaration of MAX_INVENTORY
+        // had to put this bellow the public declaration of MAX_INVENTORY
         Vehicle vehicle_inventory[MAX_INVENTORY];
 
 };
@@ -119,9 +119,13 @@ class InventorySystem
 // // Don't understand why this cannot be defined in the declatation
 // const int InventorySystem::MAX_INVENTORY = 1024;
 
-InventorySystem::InventorySystem(/* args */) {
+//InventorySystem::InventorySystem() { }
+InventorySystem::InventorySystem(): 
+    dealer_name("Default Dealer"), 
+    dealer_location("Default Location") { }
 
-}
+InventorySystem::InventorySystem(string m_dealer_name, string m_dealer_location):
+    dealer_name(m_dealer_name), dealer_location(m_dealer_location) { }
 
 InventorySystem::~InventorySystem() {
     cout << "Inventory system for dealer " << dealer_name << "@"
@@ -177,10 +181,7 @@ void InventorySystem::Quit() {
     exit;
 }
 
-
-
 void InventorySystem::BuildInventory() {
-    
     int init_inventory = 16;
     int rand_number = 0;
     srand(static_cast<unsigned int> (time (0))); //seed for rand
@@ -218,7 +219,6 @@ void InventorySystem::BuildInventory() {
 }
 
 void InventorySystem::ShowVehicleInventory() {
-
     cout << endl;
     cout << "      ****************************\n";
     cout << "           VEHICLE INVENTORY\n";
@@ -272,6 +272,13 @@ float random_price(double low, double high)
 }
 
 void InventorySystem::Run() {
+    cout << "*** Welcome to " << endl
+         << get_dealer_name() << endl
+         << get_dealer_location() << endl
+         << "Dealership ***\n\n";
+    Delay (3000, "Loading inventory, please wait ", '.'); //dummy delay
+    cout << endl << endl;
+
     int selection = 1;
     do
     {
@@ -297,16 +304,13 @@ void InventorySystem::Run() {
 
 ////
 int main() {
-    cout << " *** Welcome to Foothill Dealership ***\n\n";
-    Delay (3000, "Loading inventory, please wait ", '.'); //dummy delay
-    cout << endl << endl;
-    InventorySystem dealer1;
+    InventorySystem dealer1("Carlsen Subaru", "Redwood City");
     dealer1.BuildInventory();
     dealer1.Run();
 }
 ////
 
-
+// Functions I borrowed
 void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol) {
     const int millisecond_cycles = 600;
     std::cout  << delay_msg << std::flush ;
