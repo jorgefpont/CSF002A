@@ -71,22 +71,8 @@ Vehicle::Vehicle(): make_model("No make no model"),
                     price(100.0) { }
 
 Vehicle::~Vehicle () {
-    cout << "Vehicle object is destroyed ..." << endl;
+//    cout << "Vehicle object is destroyed ..." << endl;
 }
-
-////
-int main() {
-    Vehicle car1("Mini", 2018, 18000.00);
-    cout << "car = " << car1.get_make_model() << endl;
-    cout << "year = " << car1.get_year() << endl;
-    cout << "price = " << car1.get_price() << endl;
-
-    Vehicle car2;
-    cout << "car = " << car2.get_make_model() << endl;
-    cout << "year = " << car2.get_year() << endl;
-    cout << "price = " << car2.get_price() << endl;
-}
-////
 
 class InventorySystem
 {
@@ -95,17 +81,13 @@ class InventorySystem
         string dealer_location = DEFAULT_LOCATION;
         int vehicle_count = 0;
 
-        // Menu
-
-        // GetUserChoice
-
-        // ShowVehicleInventory
-
-        // SearchByMakeModel
-
-        // Quit
-
-        // HandleInvalidInput
+        // Member functions
+        void Menu();
+        int GetUserChoice();
+        void ShowVehicleInventory();
+        void Quit();
+        void HandleInvalidInput(); // need to fix return
+        void SearchByMakeModel();
 
     public:
         static const int MAX_INVENTORY = 1024;
@@ -114,7 +96,7 @@ class InventorySystem
         const int DEFAULT_VEHICLE_COUNT = {0};
 
         // Constructor destructor
-        InventorySystem(/* args */);
+        InventorySystem(); // need not defayult sconstructor !!!
         ~InventorySystem();
 
         // Accessors and mutators definitions
@@ -125,8 +107,7 @@ class InventorySystem
 
         // Public member functions
         void BuildInventory();
-
-        // Run
+        void Run();
     
     private:
         // had to put this bellow the plublic declaration of MAX_INVENTORY
@@ -147,26 +128,60 @@ InventorySystem::~InventorySystem() {
 }
 
 // Accessors and mutators definitions
-string InventorySystem :: get_dealer_name() const {return dealer_name;}
-string InventorySystem :: get_dealer_location() const {return dealer_location;}
-void  InventorySystem :: set_dealer_name(string m_dealer_name) {
+string InventorySystem::get_dealer_name() const {return dealer_name;}
+string InventorySystem::get_dealer_location() const {return dealer_location;}
+void  InventorySystem::set_dealer_name(string m_dealer_name) {
     dealer_name = m_dealer_name;
     }
-void InventorySystem :: set_dealer_location(string m_dealer_location) {
+void InventorySystem::set_dealer_location(string m_dealer_location) {
     dealer_location = m_dealer_location;
     }
+
+// Helper functions
+void InventorySystem::Menu() {
+    cout << "****************************\n";
+    cout << "     SMART CAR INQUIRY\n";
+    cout << "****************************\n";
+    cout << " 1. View Vehicle Inventory\n";
+    cout << " 2. Search by Make and Model\n";
+    cout << " 3. Quit\n\n";
+}
+
+int InventorySystem::GetUserChoice() {
+    int selection;
+    cout << "Please choose an option from the menu (1-3): ";
+    cin >> selection;
+
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore();
+        cout << endl;
+        return 0;
+    }
+    // need to fix this with feedback from hwk3 !!!!!!!
+    else if (selection < 1 || selection > 4){
+        return 0;
+    }
+    else{
+        return selection;
+    }
+}
+
+void InventorySystem::HandleInvalidInput() {
+    cout << "Invalid input, please try again\n\n\n";
+}
+
+void InventorySystem::Quit() {
+    cout << "Thanks, exiting the program ...\n\n";
+    exit;
+}
+
+
 
 void InventorySystem::BuildInventory() {
     
     int init_inventory = 16;
     int rand_number = 0;
-
-    // car data
-    // vector<string> cars = {"Ford Taurus", "Toyota Camry", 
-    //     "BMW 335i", "Rolls-Royce Phantom"};
-    // vector<double> low = {9000.0, 12000.0, 39500.0, 50000.0};
-    // vector<double> high = {27000.0, 30000.0, 53500.0, 180000.0};
-
     srand(static_cast<unsigned int> (time (0))); //seed for rand
 
     for (int i=0; i<init_inventory; i++)
@@ -201,8 +216,98 @@ void InventorySystem::BuildInventory() {
 
 }
 
+void InventorySystem::ShowVehicleInventory() {
+
+    cout << endl;
+    cout << "      ****************************\n";
+    cout << "           VEHICLE INVENTORY\n";
+    cout << "      ****************************\n";
+
+    for (int i=0; i<16; i++){    //need to fis the 16
+        cout << setw(20) << right << 
+        vehicle_inventory[i].get_make_model()
+        << "   " <<
+        vehicle_inventory[i].get_year() 
+        << "   " << '$' <<
+        setw(10) << fixed << setprecision(2) << right << 
+        vehicle_inventory[i].get_price() 
+        << endl;
+    }
+    cout << "\n\n"; 
+}
+
+void InventorySystem::SearchByMakeModel() {
+    string make_model;
+    int count = 0;
+        
+    cout << "Enter name and model: ";
+    cin.ignore();
+    getline(cin, make_model);
+    cout << make_model << " Inventory >>>" << endl;
+
+    for (int i=0; i<16; i++) {  // 16 hard coded !!!!!
+        if (make_model == vehicle_inventory[i].get_make_model()) { // could built this into a ftn, used twice
+            cout << setw(20) << right << 
+            vehicle_inventory[i].get_make_model()
+            << "   " <<
+            vehicle_inventory[i].get_year() 
+            << "   " << '$' <<
+            setw(10) << fixed << setprecision(2) << right << 
+            vehicle_inventory[i].get_price() 
+            << endl;
+            count ++;
+        }
+    }
+    if (count == 0) {
+        cout << "Your car is not in inventory\n";
+    }
+    cout << endl;
+}
+
 float random_price(double low, double high)
 {
     return (low + static_cast<float> (rand()) / 
         static_cast<float> (RAND_MAX / (high)));
 }
+
+void InventorySystem::Run() {
+    int selection = 1;
+    do
+    {
+        Menu();
+        selection = GetUserChoice();
+        switch (selection){
+            case 1:
+                ShowVehicleInventory();
+                break;
+            case 2:
+                SearchByMakeModel();
+                break;
+            case 3:
+                Quit();
+                break;
+            default: // Handles the '0' return
+                HandleInvalidInput();
+                break;
+        }
+    }
+    while (selection != 3);
+}
+
+////
+int main() {
+    Vehicle car1("Mini", 2018, 18000.00);
+    cout << "car = " << car1.get_make_model() << endl;
+    cout << "year = " << car1.get_year() << endl;
+    cout << "price = " << car1.get_price() << endl;
+
+    Vehicle car2;
+    cout << "car = " << car2.get_make_model() << endl;
+    cout << "year = " << car2.get_year() << endl;
+    cout << "price = " << car2.get_price() << endl;
+
+    InventorySystem dealer1;
+    dealer1.BuildInventory();
+    dealer1.Run();
+}
+////
