@@ -24,8 +24,9 @@ using namespace std;
 
 // Function declarations
 float random_price(double low, double high);
+void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol);
 
-
+// Class declarations
 class Vehicle {
     private:  
         string make_model;
@@ -296,18 +297,25 @@ void InventorySystem::Run() {
 
 ////
 int main() {
-    Vehicle car1("Mini", 2018, 18000.00);
-    cout << "car = " << car1.get_make_model() << endl;
-    cout << "year = " << car1.get_year() << endl;
-    cout << "price = " << car1.get_price() << endl;
-
-    Vehicle car2;
-    cout << "car = " << car2.get_make_model() << endl;
-    cout << "year = " << car2.get_year() << endl;
-    cout << "price = " << car2.get_price() << endl;
-
+    cout << " *** Welcome to Foothill Dealership ***\n\n";
+    Delay (3000, "Loading inventory, please wait ", '.'); //dummy delay
+    cout << endl << endl;
     InventorySystem dealer1;
     dealer1.BuildInventory();
     dealer1.Run();
 }
 ////
+
+
+void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol) {
+    const int millisecond_cycles = 600;
+    std::cout  << delay_msg << std::flush ;
+
+    for (int ms =0 ; ms < milliseconds;  ++ms) {
+        for (int cycle=0;  cycle <= millisecond_cycles * 1000; ++cycle) {
+            if (ms%1000==0 && cycle== millisecond_cycles) { // print a symbol every second
+                std::cout << delay_symbol << std::flush;
+            }
+        }                        
+    }
+}
