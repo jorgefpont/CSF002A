@@ -43,26 +43,26 @@ class Vehicle {
         ~Vehicle (); // default destructor
 
         // accessors
-        string get_make_model ( ) const;
-        int get_year ( ) const;
-        double get_price ( ) const;
+        string get_make_model( ) const;
+        int get_year( ) const;
+        double get_price( ) const;
         // mutators
-        void set_make_model (string m_make_model);
-        void set_year (int m_year_built);
-        void set_price (double m_price);
+        void set_make_model(string m_make_model);
+        void set_year(int m_year_built);
+        void set_price(double m_price);
 };
 
 // Accessors
-string Vehicle::get_make_model ( ) const {return make_model;}
-int Vehicle::get_year ( ) const {return year_built;}
-double Vehicle::get_price ( ) const {return price;}
+string Vehicle::get_make_model( ) const {return make_model;}
+int Vehicle::get_year( ) const {return year_built;}
+double Vehicle::get_price( ) const {return price;}
 // Mutators
-void Vehicle::set_make_model (string m_make_model) {make_model = m_make_model;}
-void Vehicle::set_year (int m_year_built) {year_built = m_year_built;}
-void Vehicle::set_price (double m_price) {price = m_price;}
+void Vehicle::set_make_model(string m_make_model) {make_model = m_make_model;}
+void Vehicle::set_year(int m_year_built) {year_built = m_year_built;}
+void Vehicle::set_price(double m_price) {price = m_price;}
 
 // Constructors and destructor
-Vehicle::Vehicle (string m_make_model, int m_year_built, double m_price): 
+Vehicle::Vehicle(string m_make_model, int m_year_built, double m_price): 
                     make_model(m_make_model), 
                     year_built(m_year_built), 
                     price(m_price) { }
@@ -71,7 +71,7 @@ Vehicle::Vehicle(): make_model("No make no model"),
                     year_built(1900),
                     price(100.0) { }
 
-Vehicle::~Vehicle () {
+Vehicle::~Vehicle() {
 //    cout << "Vehicle object is destroyed ..." << endl;
 }
 
@@ -86,11 +86,13 @@ class InventorySystem {
         int GetUserChoice();
         void ShowVehicleInventory();
         void Quit();
-        void HandleInvalidInput(); // need to fix return
+        void HandleInvalidInput(int selection);
         void SearchByMakeModel();
 
     public:
         static const int MAX_INVENTORY = 1024;
+        static const int init_inventory = 16;
+        //static const int MAX_INVENTORY;
         const string DEFAULT_DEALER_NAME = "Any dealer";
         const string DEFAULT_LOCATION = "The lost city";
         const int DEFAULT_VEHICLE_COUNT = 0;
@@ -111,15 +113,14 @@ class InventorySystem {
         void Run();
     
     private:
-        // had to put this bellow the public declaration of MAX_INVENTORY
+        // had to put this below the public declaration of MAX_INVENTORY
         Vehicle vehicle_inventory[MAX_INVENTORY];
 
 };
 
-// // Don't understand why this cannot be defined in the declatation
-// const int InventorySystem::MAX_INVENTORY = 1024;
+// The definition below does not work
+//const int InventorySystem::MAX_INVENTORY = 1024;
 
-//InventorySystem::InventorySystem() { }
 InventorySystem::InventorySystem(): 
     dealer_name("Default Dealer"), 
     dealer_location("Default Location") { }
@@ -163,17 +164,13 @@ int InventorySystem::GetUserChoice() {
         cout << endl;
         return 0;
     }
-    // need to fix this with feedback from hwk3 !!!!!!!
-    else if (selection < 1 || selection > 4){
-        return 0;
-    }
     else{
         return selection;
     }
 }
 
-void InventorySystem::HandleInvalidInput() {
-    cout << "Invalid input, please try again\n\n\n";
+void InventorySystem::HandleInvalidInput(int selection) {
+    cout << selection << " is an invalid input, please try again\n\n\n";
 }
 
 void InventorySystem::Quit() {
@@ -182,7 +179,6 @@ void InventorySystem::Quit() {
 }
 
 void InventorySystem::BuildInventory() {
-    int init_inventory = 16;
     int rand_number = 0;
     srand(static_cast<unsigned int> (time (0))); //seed for rand
 
@@ -224,7 +220,7 @@ void InventorySystem::ShowVehicleInventory() {
     cout << "           VEHICLE INVENTORY\n";
     cout << "      ****************************\n";
 
-    for (int i=0; i<16; i++){    //need to fis the 16
+    for (int i=0; i<init_inventory; i++){ 
         cout << setw(20) << right << 
         vehicle_inventory[i].get_make_model()
         << "   " <<
@@ -246,7 +242,7 @@ void InventorySystem::SearchByMakeModel() {
     getline(cin, make_model);
     cout << make_model << " Inventory >>>" << endl;
 
-    for (int i=0; i<16; i++) {  // 16 hard coded !!!!!
+    for (int i=0; i<init_inventory; i++) {  // 16 hard coded !!!!!
         if (make_model == vehicle_inventory[i].get_make_model()) { // could built this into a ftn, used twice
             cout << setw(20) << right << 
             vehicle_inventory[i].get_make_model()
@@ -295,7 +291,7 @@ void InventorySystem::Run() {
                 Quit();
                 break;
             default: // Handles the '0' return
-                HandleInvalidInput();
+                HandleInvalidInput(selection);
                 break;
         }
     }
