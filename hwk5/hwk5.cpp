@@ -32,7 +32,6 @@ class Vehicle {
         string make_model;
         int year_built;
         double price;
-        static int VEHICLE_COUNT; // to keep track of vehicles in inventory
 
     public:
         // const string DEFAULT_MAKE_MODEL = {"No make no model"};
@@ -47,7 +46,7 @@ class Vehicle {
         string get_make_model( ) const;
         int get_year( ) const;
         double get_price( ) const;
-        static int get_vehicle_count();
+        // int get_vehicle_count() const;
         // mutators
         void set_make_model(string m_make_model);
         void set_year(int m_year_built);
@@ -58,7 +57,6 @@ class Vehicle {
 string Vehicle::get_make_model( ) const {return make_model;}
 int Vehicle::get_year( ) const {return year_built;}
 double Vehicle::get_price( ) const {return price;}
-int Vehicle::get_vehicle_count() {return Vehicle::VEHICLE_COUNT;}
 
 // Mutators
 void Vehicle::set_make_model(string m_make_model) {make_model = m_make_model;}
@@ -69,8 +67,7 @@ void Vehicle::set_price(double m_price) {price = m_price;}
 Vehicle::Vehicle(string m_make_model, int m_year_built, double m_price): 
                     make_model(m_make_model), 
                     year_built(m_year_built), 
-                    price(m_price) 
-                    {Vehicle::VEHICLE_COUNT ++;}
+                    price(m_price) { }
 
 Vehicle::Vehicle(): make_model("No make no model"),
                     year_built(1900),
@@ -78,7 +75,6 @@ Vehicle::Vehicle(): make_model("No make no model"),
 
 Vehicle::~Vehicle() {
     //cout << "Vehicle object is destroyed ..." << endl;
-    Vehicle::VEHICLE_COUNT --;
 }
 
 class InventorySystem {
@@ -97,7 +93,7 @@ class InventorySystem {
     public:
         static const int MAX_INVENTORY = 1024;
         static const int INIT_INVENTORY = 16;
-        //static const int MAX_INVENTORY;
+        static int VEHICLE_COUNT; // to keep track of vehicles in inventory, defined outside
         const string DEFAULT_DEALER_NAME = "Any dealer";
         const string DEFAULT_LOCATION = "The lost city";
         const int DEFAULT_VEHICLE_COUNT = 0;
@@ -112,10 +108,12 @@ class InventorySystem {
         string get_dealer_location() const;
         void set_dealer_name(string m_dealer_name);
         void set_dealer_location(string m_dealer_location);
+        void AddVehicle();
 
         // Public member functions
         void BuildInventory();
         void Run();
+        int get_vehicle_count();
     
     private:
         // had to put this below the public declaration of MAX_INVENTORY for it to work
@@ -123,7 +121,7 @@ class InventorySystem {
 };
 
 // Variable for tracking count of non default vehicles instantiated
-int Vehicle::VEHICLE_COUNT = InventorySystem::INIT_INVENTORY;
+int InventorySystem::VEHICLE_COUNT = INIT_INVENTORY;
 
 InventorySystem::InventorySystem(): 
     dealer_name("Default Dealer"), 
@@ -146,6 +144,7 @@ void  InventorySystem::set_dealer_name(string m_dealer_name) {
 void InventorySystem::set_dealer_location(string m_dealer_location) {
     dealer_location = m_dealer_location;
     }
+int InventorySystem::get_vehicle_count() {return InventorySystem::VEHICLE_COUNT;}
 
 // Helper functions
 void InventorySystem::Menu() {
@@ -218,13 +217,33 @@ void InventorySystem::BuildInventory() {
     }
 }
 
+void InventorySystem::AddVehicle() {
+    string make_model;
+    int year;
+    double price;
+
+    cout << "Enter vehicle make model: ";
+    if (cin.peek() == '\n') {cin.ignore();}
+    getline(cin, make_model);
+    cout << "Enter vehicle year: ";
+    cin >> year;
+    cout << "Enter vehicle price: ";
+    cin >> price;
+    cout << endl;
+
+    vehicle_inventory[VEHICLE_COUNT].set_make_model(make_model);
+    vehicle_inventory[VEHICLE_COUNT].set_price(price);
+    vehicle_inventory[VEHICLE_COUNT].set_year(year);
+    VEHICLE_COUNT ++;
+}
+
 void InventorySystem::ShowVehicleInventory() {
     cout << endl;
     cout << "      ****************************\n";
     cout << "           VEHICLE INVENTORY\n";
     cout << "      ****************************\n";
 
-    for (int i=0; i<InventorySystem::INIT_INVENTORY; i++){ 
+    for (int i=0; i<InventorySystem::VEHICLE_COUNT; i++){ 
         cout << setw(20) << right << 
         vehicle_inventory[i].get_make_model()
         << "   " <<
@@ -234,7 +253,7 @@ void InventorySystem::ShowVehicleInventory() {
         vehicle_inventory[i].get_price() 
         << endl;
     }
-    cout << "\nThere are " << Vehicle::get_vehicle_count() 
+    cout << "\nThere are " << InventorySystem::get_vehicle_count() 
          << " vehicles in inventory." << "\n\n"; 
 }
 
@@ -247,7 +266,7 @@ void InventorySystem::SearchByMakeModel() {
     getline(cin, make_model);
     cout << make_model << " Inventory >>>" << endl;
 
-    for (int i=0; i<InventorySystem::INIT_INVENTORY; i++) {  
+    for (int i=0; i<InventorySystem::VEHICLE_COUNT; i++) {  
         if (make_model == vehicle_inventory[i].get_make_model()) { // could built this into a ftn, used twice
             cout << setw(20) << right << 
             vehicle_inventory[i].get_make_model()
@@ -293,7 +312,7 @@ void InventorySystem::Run() {
                 SearchByMakeModel();
                 break;
             case 3:
-                //AddVehicle();
+                AddVehicle();
                 break;
             case 4:
                 Quit();
