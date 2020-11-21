@@ -4,8 +4,8 @@ Author      : Jorge Pont
 Copyright   : N/A
 Description : hwk5, a car dealer inventory system
               using OOP principles
-Rev History : Initial
-Date        : 11/xx/2020
+Rev History : Initial hwk release
+Date        : 11/21/2020
 Version     : 1.0
 Comments    : 
 Change ID   : NA     
@@ -23,10 +23,9 @@ Comment     : NA
 using namespace std;
 
 // Function declarations
-float random_price(double low, double high);
+float random_price(double low, double high); // I chose to keep this outside of the class
 void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol);
 
-// Class declarations
 class Vehicle {
     private:  
         string make_model;
@@ -34,10 +33,6 @@ class Vehicle {
         double price;
 
     public:
-        // const string DEFAULT_MAKE_MODEL = {"No make no model"};
-        // const int DEFAULT_YEAR_BUILT = {1900};
-        // const double DEFAULT_PRICE = {100.0};
-        
         Vehicle ();
         Vehicle (string m_make_model, int m_year_built, double m_price);
         ~Vehicle (); // default destructor
@@ -73,9 +68,9 @@ Vehicle::Vehicle(): make_model("No make no model"),
                     year_built(1900),
                     price(100.0) { }
 
-Vehicle::~Vehicle() {
+Vehicle::~Vehicle() { }
     //cout << "Vehicle object is destroyed ..." << endl;
-}
+    // had to remove this otherwise I got 1024 lines out
 
 class InventorySystem {
     private:
@@ -103,7 +98,7 @@ class InventorySystem {
         InventorySystem(string m_dealer_name, string m_dealer_location);
         ~InventorySystem();
 
-        // Accessors and mutators definitions
+        // Accessors and mutators
         string get_dealer_name() const;
         string get_dealer_location() const;
         void set_dealer_name(string m_dealer_name);
@@ -117,10 +112,12 @@ class InventorySystem {
     
     private:
         // had to put this below the public declaration of MAX_INVENTORY for it to work
+        // not sure why ordeer maters
         Vehicle vehicle_inventory[MAX_INVENTORY];
 };
 
 // Variable for tracking count of non default vehicles instantiated
+// through AddVehicle feature
 int InventorySystem::VEHICLE_COUNT = INIT_INVENTORY;
 
 InventorySystem::InventorySystem(): 
@@ -222,19 +219,26 @@ void InventorySystem::AddVehicle() {
     int year;
     double price;
 
-    cout << "Enter vehicle make model: ";
-    if (cin.peek() == '\n') {cin.ignore();}
-    getline(cin, make_model);
-    cout << "Enter vehicle year: ";
-    cin >> year;
-    cout << "Enter vehicle price: ";
-    cin >> price;
-    cout << endl;
+    if (VEHICLE_COUNT < InventorySystem::MAX_INVENTORY){
+        cout << "Enter vehicle make model: ";
+        if (cin.peek() == '\n') {cin.ignore();}
+        getline(cin, make_model);
+        cout << "Enter vehicle year: ";
+        cin >> year;
+        cout << "Enter vehicle price: ";
+        cin >> price;
+        cout << endl;
 
-    vehicle_inventory[VEHICLE_COUNT].set_make_model(make_model);
-    vehicle_inventory[VEHICLE_COUNT].set_price(price);
-    vehicle_inventory[VEHICLE_COUNT].set_year(year);
-    VEHICLE_COUNT ++;
+        vehicle_inventory[VEHICLE_COUNT].set_make_model(make_model);
+        vehicle_inventory[VEHICLE_COUNT].set_price(price);
+        vehicle_inventory[VEHICLE_COUNT].set_year(year);
+        VEHICLE_COUNT ++;
+    }
+    else
+    {
+        cout << "Inventory full, cannot add new vehicles.\n\n";
+    }
+    
 }
 
 void InventorySystem::ShowVehicleInventory() {
@@ -333,7 +337,7 @@ int main() {
 }
 ////
 
-// Functions I borrowed
+/// Functions I borrowed
 void  Delay (int  milliseconds,  std::string delay_msg,  char  delay_symbol) {
     const int millisecond_cycles = 600;
     std::cout  << delay_msg << std::flush ;
