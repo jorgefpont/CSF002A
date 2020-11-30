@@ -15,10 +15,14 @@ Comment     : NA
 
 #include <iostream>
 #include <iomanip>
-#include <string>
+#include <string.h>
 #include <cstdlib>
+#include <time.h>
+#include <stdlib.h>
 
 using namespace std;
+
+float random_num(double low, double high);
 
 /////////////// Fruit Class
 
@@ -158,17 +162,22 @@ void OnlineSuperMarket::set_web_address(string m_web_address) {web_address = m_w
 
 
 void OnlineSuperMarket::Init(Fruit fruits[], int count) {
+    int rand_number = 0;
+    srand(static_cast<unsigned int> (time (0))); //seed for rand
     for (int i=0; i<count; i++) {
             fruits[i].set_fruit_name(fruit_types[i]);
+            fruits[i].set_unit_price(random_num(low_price[i], high_price[i]));
+            fruits[i].set_weight(random_num(low_weight, high_weight));
     }
 }
 
 
 void OnlineSuperMarket::ShowFruits(Fruit fruits[], int count) {
 
-    cout << "      ****************************\n";
+    cout << "      *************************\n";
     cout << "           FRUIT INVENTORY\n";
-    cout << "      ****************************\n";
+    cout << "        Fruit / Price / Weight\n"
+    cout << "      *************************\n";
 
     for (int i=0; i<count; i++){ 
         fruits[i].Fruit::Display();
@@ -236,9 +245,10 @@ void OnlineSuperMarket::Quit() {
     exit(0);
 }
 
-float random_price(double low, double high) {
+float random_num(double low, double high) {
+
     return (low + static_cast<float> (rand()) / 
-        static_cast<float> (RAND_MAX / (high)));
+        static_cast<float> (RAND_MAX / (high-low)));
 }
 
 //////////////////////////////////////////////////
