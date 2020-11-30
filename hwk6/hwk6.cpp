@@ -123,6 +123,7 @@ class OnlineSuperMarket {
         // Public member functions
         static void Init(Fruit fruits[], int count);
         static void ShowFruits(Fruit fruits[], int count);
+        static void BubbleSort (Fruit fruits[], int count);
         void Run();
     
     private:  // had to put this below the public declaration of MAX_FRUITS for it to work
@@ -171,12 +172,32 @@ void OnlineSuperMarket::Init(Fruit fruits[], int count) {
     }
 }
 
+void OnlineSuperMarket::BubbleSort (Fruit fruits[], int count) {
+   bool swapped = true;
+   int j = 0;
+
+   Fruit temp_obj;
+
+   while (swapped) {
+       swapped = false;
+       j++;
+
+       for (int i = 0; i < count - j; i++) {
+             if (fruits[i].get_fruit_name().compare (fruits[i + 1].get_fruit_name ()) > 0) {
+                  temp_obj = fruits[i];
+                  fruits[i] = fruits[i + 1];
+                  fruits[i + 1] = temp_obj;
+                  swapped = true;
+              }
+       }
+    }
+}
 
 void OnlineSuperMarket::ShowFruits(Fruit fruits[], int count) {
 
     cout << "      *************************\n";
     cout << "           FRUIT INVENTORY\n";
-    cout << "        Fruit / Price / Weight\n"
+    cout << "        Fruit / Price / Weight\n";
     cout << "      *************************\n";
 
     for (int i=0; i<count; i++){ 
@@ -251,7 +272,7 @@ float random_num(double low, double high) {
         static_cast<float> (RAND_MAX / (high-low)));
 }
 
-//////////////////////////////////////////////////
+//---------------------------------------------------------------
 
 int main() {
     Fruit afruit;
@@ -273,6 +294,10 @@ int main() {
     cout << endl;
 
     OnlineSuperMarket::Init(fruit_inventory, OnlineSuperMarket::MAX_FRUITS);
+    OnlineSuperMarket::ShowFruits(fruit_inventory, OnlineSuperMarket::MAX_FRUITS);
+    cout << endl;
+    
+    OnlineSuperMarket::BubbleSort(fruit_inventory, OnlineSuperMarket::MAX_FRUITS);
     OnlineSuperMarket::ShowFruits(fruit_inventory, OnlineSuperMarket::MAX_FRUITS);
     cout << endl;
 
