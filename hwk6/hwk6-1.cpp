@@ -94,6 +94,7 @@ class OnlineSuperMarket {
     private:
         string market_name;
         string web_address;
+        double static tax_rate;
 
         // Member functions
         string GetUserChoice();
@@ -115,6 +116,7 @@ class OnlineSuperMarket {
         // Accessors and mutators
         string get_market_name() const;
         string get_web_address() const;
+        static double get_tax_rate();
         void set_market_name(string m_market_name);
         void set_web_address(string m_web_address);
 
@@ -142,6 +144,7 @@ double OnlineSuperMarket::low_price[MAX_FRUITS] = {0.50, 2.10, 2.00, 2.15, 0.60,
 double OnlineSuperMarket::high_price[MAX_FRUITS] = {0.85, 3.50, 3.50, 4.50, 1.45, 3.20, 4.50, 3.25};
 double OnlineSuperMarket::low_weight = 10.0;
 double OnlineSuperMarket::high_weight = 50.0;
+double OnlineSuperMarket::tax_rate = 0.085;
 
 // Constructors and destructor ---------------------
 OnlineSuperMarket::OnlineSuperMarket(): 
@@ -159,6 +162,7 @@ OnlineSuperMarket::~OnlineSuperMarket() {
 // Accessors and mutators definitions ---------------
 string OnlineSuperMarket::get_market_name() const {return market_name;}
 string OnlineSuperMarket::get_web_address() const {return web_address;}
+double OnlineSuperMarket::get_tax_rate() {return tax_rate;}
 void  OnlineSuperMarket::set_market_name(string m_market_name) {market_name = m_market_name;}
 void OnlineSuperMarket::set_web_address(string m_web_address) {web_address = m_web_address;}
 
@@ -219,13 +223,15 @@ int OnlineSuperMarket::Order(int res, double weight) {
     if(weight > fruit_inventory[res].get_weight()) {
         cout << "We do not have enough " << fruit_inventory[res].get_fruit_name() 
              << " to fulfill your order";
-        //return -1;
+        return -1;
     }
     else {
-        double cost = weight * fruit_inventory[res].get_unit_price();
+        double cost = weight * fruit_inventory[res].get_unit_price() * 
+            (1.0 + get_tax_rate());
         cout << "Cost for " << weight << " of " 
              << fruit_inventory[res].get_fruit_name()
              << " is $" << cost << endl; 
+        return 0;
     }
 }
 
