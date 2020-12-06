@@ -2,10 +2,10 @@
 File Name   : hwk5.cpp
 Author      : Jorge Pont
 Copyright   : N/A
-Description : hwk5, a car dealer inventory system
+Description : hwk6, a fruit dealer shopping system
               using OOP principles
 Rev History : Initial hwk release
-Date        : 11/21/2020
+Date        : 12/xx/2020
 Version     : 1.0
 Comments    : 
 Change ID   : NA     
@@ -69,7 +69,10 @@ Fruit::Fruit(): fruit_name(DEFAULT_FRUIT_NAME),
                     weight(DEFAULT_WEIGHT),
                     unit_price(DEFAULT_UNIT_PRICE) { }
 
-Fruit::~Fruit() { } // Need to add message !!!
+Fruit::~Fruit() { 
+    cout << "Fruit = " << Fruit::fruit_name << ", Weight = "
+        << weight << ", is rotten" << endl << endl;
+} // Need to add message !!!
 
 // Accessors
 string Fruit::get_fruit_name( ) const {return fruit_name;}
@@ -88,14 +91,13 @@ void Fruit::Display( ) const {
          << "$" << unit_price << "\t" << weight << endl << left;
 }
 
-/////////////// End of Fruit Class
-
 /////////////// Online Supermarket Class
 
 class OnlineSuperMarket {
     private:
         string market_name;
         string web_address;
+        double static tax_rate;
 
         // Member functions
         string GetUserChoice();
@@ -117,22 +119,26 @@ class OnlineSuperMarket {
         // Accessors and mutators
         string get_market_name() const;
         string get_web_address() const;
+        static double get_tax_rate();
         void set_market_name(string m_market_name);
         void set_web_address(string m_web_address);
 
         // Public member functions
-        static void Init(Fruit fruits[], int count);
-        static void ShowFruits(Fruit fruits[], int count);
-        static void BubbleSort (Fruit fruits[], int count);
+        void Init();
+        void ShowFruits();
+        void BubbleSort ();
         void Run();
+        int Find(string fruit, double weight);
+        int Order(int res, double weight);
     
     private:  // had to put this below the public declaration of MAX_FRUITS for it to work
-        static Fruit fruit_inventory[MAX_FRUITS];
+        //static Fruit fruit_inventory[MAX_FRUITS];
+        Fruit fruit_inventory[MAX_FRUITS];
         static string fruit_types[MAX_FRUITS];
         static double low_price[MAX_FRUITS];
 };
 
-// Variables
+// Variables ---------------------------------------
 const string OnlineSuperMarket::DEFAULT_MARKET_NAME {"No Market"};
 const string OnlineSuperMarket::DEFAULT_WEB_ADDRESS {"http://www.martkey.com"};
 string OnlineSuperMarket::fruit_types[MAX_FRUITS] = {"Banana", "Strawberry", "Orange", "Grapes", "Watermelon", 
@@ -141,8 +147,9 @@ double OnlineSuperMarket::low_price[MAX_FRUITS] = {0.50, 2.10, 2.00, 2.15, 0.60,
 double OnlineSuperMarket::high_price[MAX_FRUITS] = {0.85, 3.50, 3.50, 4.50, 1.45, 3.20, 4.50, 3.25};
 double OnlineSuperMarket::low_weight = 10.0;
 double OnlineSuperMarket::high_weight = 50.0;
+double OnlineSuperMarket::tax_rate = 0.085;
 
-// Constructors and destructor
+// Constructors and destructor ---------------------
 OnlineSuperMarket::OnlineSuperMarket(): 
     market_name(DEFAULT_MARKET_NAME), 
     web_address(DEFAULT_WEB_ADDRESS) { }
@@ -155,24 +162,25 @@ OnlineSuperMarket::~OnlineSuperMarket() {
          << web_address << " is closed" << endl; 
 }
 
-// Accessors and mutators definitions
+// Accessors and mutators definitions ---------------
 string OnlineSuperMarket::get_market_name() const {return market_name;}
 string OnlineSuperMarket::get_web_address() const {return web_address;}
+double OnlineSuperMarket::get_tax_rate() {return tax_rate;}
 void  OnlineSuperMarket::set_market_name(string m_market_name) {market_name = m_market_name;}
 void OnlineSuperMarket::set_web_address(string m_web_address) {web_address = m_web_address;}
 
 
-void OnlineSuperMarket::Init(Fruit fruits[], int count) {
+void OnlineSuperMarket::Init() {
     int rand_number = 0;
     srand(static_cast<unsigned int> (time (0))); //seed for rand
-    for (int i=0; i<count; i++) {
-            fruits[i].set_fruit_name(fruit_types[i]);
-            fruits[i].set_unit_price(random_num(low_price[i], high_price[i]));
-            fruits[i].set_weight(random_num(low_weight, high_weight));
+    for (int i=0; i<MAX_FRUITS; i++) {
+            fruit_inventory[i].set_fruit_name(fruit_types[i]);
+            fruit_inventory[i].set_unit_price(random_num(low_price[i], high_price[i]));
+            fruit_inventory[i].set_weight(random_num(low_weight, high_weight));
     }
 }
 
-void OnlineSuperMarket::BubbleSort (Fruit fruits[], int count) {
+void OnlineSuperMarket::BubbleSort () {
    bool swapped = true;
    int j = 0;
 
@@ -182,52 +190,54 @@ void OnlineSuperMarket::BubbleSort (Fruit fruits[], int count) {
        swapped = false;
        j++;
 
-       for (int i = 0; i < count - j; i++) {
-             if (fruits[i].get_fruit_name().compare (fruits[i + 1].get_fruit_name ()) > 0) {
-                  temp_obj = fruits[i];
-                  fruits[i] = fruits[i + 1];
-                  fruits[i + 1] = temp_obj;
+       for (int i = 0; i < MAX_FRUITS - j; i++) {
+             if (fruit_inventory[i].get_fruit_name().compare (fruit_inventory[i + 1].get_fruit_name ()) > 0) {
+                  temp_obj = fruit_inventory[i];
+                  fruit_inventory[i] = fruit_inventory[i + 1];
+                  fruit_inventory[i + 1] = temp_obj;
                   swapped = true;
               }
        }
     }
 }
 
-void OnlineSuperMarket::ShowFruits(Fruit fruits[], int count) {
+void OnlineSuperMarket::ShowFruits() {
 
-    cout << "      *************************\n";
     cout << "           FRUIT INVENTORY\n";
     cout << "        Fruit / Price / Weight\n";
     cout << "      *************************\n";
 
-    for (int i=0; i<count; i++){ 
-        fruits[i].Fruit::Display();
+    for (int i=0; i<MAX_FRUITS; i++){ 
+        fruit_inventory[i].Fruit::Display();
     }
 }
 
-// void OnlineSuperMarket::SearchByMakeModel() {
-//     string make_model;
-//     int count = 0;
-        
-//     cout << "Enter name and model: ";
-//     cin.ignore();
-//     getline(cin, make_model);
+int OnlineSuperMarket::Find(string fruit, double weight) {
+    for (int i=0; i<MAX_FRUITS; i++) {  
+        if (fruit == fruit_inventory[i].get_fruit_name()) { 
+            return i;
+        }
+    }
+    return -1;
+}
 
-//     for (int i=0; i<OnlineSuperMarket::MAX_FRUITS; i++) {  
-//         if (make_model == fruit_inventory[i].get_make_model()) { // could built this into a ftn, used twice
-//             cout << setw(20) << right << 
-//             fruit_inventory[i].get_make_model()
-//             << "   " <<
-//             fruit_inventory[i].get_year() 
-//             << "   " << '$' <<
-//             setw(10) << fixed << setprecision(2) << right << 
-//             fruit_inventory[i].get_price() 
-//             << endl;
-//             count ++;
-//         }
-//     }
-// }
-
+int OnlineSuperMarket::Order(int res, double weight) {
+    if(weight > fruit_inventory[res].get_weight()) {
+        cout << "We do not have enough " << fruit_inventory[res].get_fruit_name() 
+             << " to fulfill your order\n";
+        return -1;
+    }
+    else {
+        double cost = weight * fruit_inventory[res].get_unit_price() * 
+            (1.0 + get_tax_rate());
+        cout << "Cost for " << weight << " of " 
+             << fruit_inventory[res].get_fruit_name()
+             << " is $" << cost << endl; 
+        // update weight
+        fruit_inventory[res].set_weight(fruit_inventory[res].get_weight() - weight);
+        return 0;
+    }
+}
 
 void OnlineSuperMarket::Run() {
     string user_input;
@@ -237,22 +247,35 @@ void OnlineSuperMarket::Run() {
     cout << "*** Welcome to " << endl
          << get_market_name() << endl
          << get_web_address() << endl
-         << "***\n\n";
+         << "***************\n";
 
     do
     {
+
         cout << "\nEnter 'order' or 'XXX' to quit: ";
         getline(cin, user_input);
 
         if (user_input == "order" || user_input == "ORDER" || user_input == "Order") {
+            
+            cout << endl;
+            ShowFruits();
+            cout << endl;
+
             cout << "Enter fruit name: ";
             getline(cin, fruit_name);
             cout << "Enter weight to purchase: ";
             cin >> weight;
             cin.ignore(); //needed to clear the '\n' in the buffer after a cin >>
-            cout << endl;
-            cout << "Ordering: " << fruit_name << ", " << weight;
-            //Find(fruit_name, weight); //need to define 
+            cout << "Ordering: " << fruit_name << ", " << weight << endl;
+
+            int res = Find(fruit_name, weight);
+            if (res > -1) {
+                Order(res, weight);
+            } 
+            else {
+                cout << "Fruit not found" << endl;
+            }
+            
         }
         else if (user_input == "xxx" || user_input == "XXX") {
             Quit();
@@ -275,31 +298,29 @@ float random_num(double low, double high) {
 //---------------------------------------------------------------
 
 int main() {
-    Fruit afruit;
-    afruit.Display();
+
+    //using pointers
+    OnlineSuperMarket sup1;
+    OnlineSuperMarket * p_sup1 = nullptr;
+    p_sup1 = & sup1;
+    p_sup1 -> set_market_name("Draegers");
+    p_sup1 -> set_web_address("http://www.draegers.com");
+    cout << p_sup1 -> get_market_name() << endl;
+    cout << p_sup1 -> get_web_address() << endl;
     cout << endl;
 
-    Fruit afruit1("Apple", 20.0, 100.0);
-    afruit1.Display();
+    p_sup1 -> ShowFruits();
     cout << endl;
 
-    OnlineSuperMarket sup1("Draegers", "http://www.draegers.com");
-    cout << sup1.get_market_name() << endl;
-    cout << sup1.get_web_address() << endl;
-    cout << endl;
-
-    // array with default fruit objects
-    Fruit fruit_inventory[OnlineSuperMarket::MAX_FRUITS];
-    OnlineSuperMarket::ShowFruits(fruit_inventory, OnlineSuperMarket::MAX_FRUITS);
-    cout << endl;
-
-    OnlineSuperMarket::Init(fruit_inventory, OnlineSuperMarket::MAX_FRUITS);
-    OnlineSuperMarket::ShowFruits(fruit_inventory, OnlineSuperMarket::MAX_FRUITS);
+    p_sup1 -> Init();
+    p_sup1 -> ShowFruits();
     cout << endl;
     
-    OnlineSuperMarket::BubbleSort(fruit_inventory, OnlineSuperMarket::MAX_FRUITS);
-    OnlineSuperMarket::ShowFruits(fruit_inventory, OnlineSuperMarket::MAX_FRUITS);
+    p_sup1 -> BubbleSort();
+    p_sup1 -> ShowFruits();
     cout << endl;
 
-    //sup1.Run();
+    p_sup1 -> Run();
+
+    return 0;
 }
